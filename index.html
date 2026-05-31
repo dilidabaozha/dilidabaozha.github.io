@@ -1,211 +1,219 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>囚图纪 · 历史时空海报集</title>
-    <style>
-        :root {
-            --bg-base: #0a0b10; 
-            --ink-black: #11131b;
-            --parchment: #d2c5b3;
-            --bronze: #a98c64;
-            --crimson: #8c2424;
-            --text-main: #e2e4ec;
-            --text-muted: #7e8294;
-        }
+export default function Home() {
+  const seasons = [
+    "S1 夏",
+    "S2 商",
+    "S3 周",
+    "S4 秦",
+    "S5 汉",
+    "S6 三国",
+    "S7 晋",
+    "S8 南北朝",
+    "S9 隋",
+    "S10 唐",
+    "S11 五代十国",
+    "S12 宋",
+    "S13 元",
+    "S14 明",
+    "S15 清",
+    "S16 民国",
+    "S17 新中国",
+  ];
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+  const regions = [
+    "江西赛区",
+    "广东赛区",
+    "湖北赛区",
+    "四川赛区",
+    "新疆赛区",
+    "辽宁赛区",
+  ];
 
-        /* 站酷风格允许纵向无限延伸滚动 */
-        body {
-            background-color: var(--bg-base);
-            font-family: 'Noto Serif SC', 'Source Han Serif CN', serif;
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
+  return (
+    <main className="bg-[#0F1923] text-white min-h-screen">
 
-        /* 1. 全局史诗地图背景（固定不动） */
-        .map-background {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.65;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Ccircle cx='800' cy='450' r='380' fill='none' stroke='rgba(169, 140, 100, 0.12)' stroke-width='1'/%3E%3Cpath d='M800,20 L800,880 M200,450 L1400,450' stroke='rgba(169, 140, 100, 0.06)' stroke-width='1' stroke-dasharray='8,8'/%3E%3Cpath d='M 150,250 Q 350,220 550,200 T 980,180 T 1450,150 Q 1500,350 1400,500 T 800,720 Z' fill='none' stroke='rgba(169, 140, 100, 0.1)' stroke-width='1.5'/%3E%3C/svg%3E");
-            background-size: cover;
-            background-position: center;
-        }
-        .vignette-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(10, 11, 16, 0.9) 90%);
-            z-index: 2;
-            pointer-events: none;
-        }
+      {/* NAVBAR */}
+      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur border-b border-yellow-600">
+        <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
 
-        /* 2. 纵向长图流式容器 */
-        .zcool-container {
-            position: relative;
-            z-index: 10;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 100px; /* 模块之间留出大量空白，营造高级感 */
-        }
+          <div className="text-2xl font-bold text-yellow-500">
+            囚图纪 Universe
+          </div>
 
-        /* 📌 结构 A：巨幕电影感头图（一进网页的视觉轰炸） */
-        .hero-banner {
-            text-align: center;
-            padding: 100px 0 60px 0;
-            position: relative;
-        }
-        .hero-banner .subtitle {
-            font-size: 0.9rem;
-            color: var(--bronze);
-            letter-spacing: 8px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-        .hero-banner h1 {
-            font-size: 4.5rem;
-            font-weight: 900;
-            letter-spacing: 15px;
-            color: #fff;
-            margin-bottom: 30px;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-        .hero-banner h1 span { color: var(--crimson); }
-        
-        /* 站酷灵魂：极细的古典装饰线 */
-        .divider-line {
-            width: 120px; height: 1px; background: var(--bronze); margin: 0 auto 30px auto; position: relative;
-        }
-        .divider-line::before {
-            content: ''; position: absolute; top: -3px; left: 54px; width: 8px; height: 8px; background: var(--crimson); transform: rotate(45deg);
-        }
+          <div className="flex gap-8 text-sm">
+            <a href="#">中国服务器</a>
+            <a href="#">赛区联盟</a>
+            <a href="#">俱乐部中心</a>
+            <a href="#">历史战报</a>
+            <a href="#">世界观百科</a>
+          </div>
+        </div>
+      </nav>
 
-        .hero-desc {
-            max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 2; color: var(--parchment); opacity: 0.8;
-        }
+      {/* HERO */}
+      <section className="h-screen flex items-center justify-center relative overflow-hidden">
 
-        /* 📌 结构 B：画卷式视频大幕区（核心作品展示） */
-        .work-display-section {
-            background: var(--ink-black);
-            border: 1px solid rgba(169, 140, 100, 0.2);
-            padding: 8px;
-            box-shadow: 0 40px 90px rgba(0,0,0,0.9);
-            position: relative;
-        }
-        .work-display-section::before {
-            content: ''; position: absolute; top: -1px; left: -1px; width: 20px; height: 20px; border-top: 2px solid var(--bronze); border-left: 2px solid var(--bronze);
-        }
-        .work-display-section::after {
-            content: ''; position: absolute; bottom: -1px; right: -1px; width: 20px; height: 20px; border-bottom: 2px solid var(--bronze); border-right: 2px solid var(--bronze);
-        }
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
 
-        /* 📌 结构 C：三栏式历史图文拆解（站酷最核心的信息层叠感） */
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-        .detail-card {
-            background: rgba(17, 19, 27, 0.6);
-            border: 1px solid rgba(169, 140, 100, 0.15);
-            padding: 35px 25px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s, border-color 0.3s;
-        }
-        .detail-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--crimson);
-        }
-        .card-num {
-            font-family: 'Courier New', monospace; font-size: 1.5rem; color: var(--crimson); font-weight: bold; margin-bottom: 15px; display: block;
-        }
-        .detail-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 15px; letter-spacing: 2px; }
-        .detail-card p { font-size: 0.88rem; line-height: 1.8; color: var(--text-muted); text-align: justify; }
+        <div className="text-center z-10">
 
-        /* 📌 结构 D：大字报式概念收尾区 */
-        .outro-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(169, 140, 100, 0.15);
-            padding-top: 40px;
-            margin-top: 40px;
-        }
-        .outro-text h4 { font-size: 1.8rem; letter-spacing: 4px; color: var(--parchment); margin-bottom: 10px; }
-        .outro-text p { font-size: 0.9rem; color: var(--text-muted); }
-        
-        .seal-group { display: flex; gap: 20px; align-items: center; }
-        .seal-red {
-            border: 2px solid var(--crimson); padding: 10px 5px; color: var(--crimson); font-weight: 900; font-size: 1.1rem; writing-mode: vertical-rl; letter-spacing: 2px; background: rgba(140, 36, 36, 0.02);
-        }
-    </style>
-</head>
-<body>
+          <h1 className="text-7xl font-black mb-6">
+            囚图纪 UNIVERSE
+          </h1>
 
-    <div class="map-background"></div>
-    <div class="vignette-overlay"></div>
+          <p className="text-xl text-gray-300 mb-8">
+            从史前测试服到新时代赛季
+            <br />
+            一部中国历史电竞编年史
+          </p>
 
-    <!-- 站酷流式长图布局 -->
-    <div class="zcool-container">
-        
-        <!-- 结构 A：史诗头图 -->
-        <header class="hero-banner">
-            <div class="subtitle">An Administrative History Project</div>
-            <h1>囚图纪 · <span>九朝变革</span></h1>
-            <div class="divider-line"></div>
-            <p class="hero-desc">
-                舆图之上，皆为囚徒。这是一部关于中国历代地缘边界演变的视觉考据史，用冷峻的图幅线条，重构被地理行政划分禁锢的波澜壮阔。
-            </p>
-        </header>
+          <div className="flex gap-4 justify-center">
 
-        <!-- 结构 B：巨幕作品流 -->
-        <section class="work-display-section">
-            <div class="video-wrapper">
-                <iframe src="//player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
+            <button className="px-8 py-4 bg-yellow-600 rounded-lg hover:bg-yellow-500 transition">
+              进入中国服务器
+            </button>
+
+            <button className="px-8 py-4 border border-yellow-600 rounded-lg hover:bg-yellow-600/20 transition">
+              观看历史战报
+            </button>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 中国服务器 */}
+      <section className="py-24 px-8">
+
+        <h2 className="text-4xl font-bold text-center mb-12">
+          中国服务器
+        </h2>
+
+        <div className="max-w-6xl mx-auto bg-[#13202d] rounded-2xl p-8 border border-yellow-700">
+
+          <div className="h-[500px] flex items-center justify-center">
+
+            <div className="text-center">
+              <div className="text-3xl mb-4">
+                中国地图区域
+              </div>
+
+              <div className="text-gray-400">
+                后期接入 GeoJSON 地图
+              </div>
             </div>
-        </section>
 
-        <!-- 结构 C：画廊式考据细节拆解（站酷招牌式的信息排版） -->
-        <section class="details-grid">
-            <div class="detail-card">
-                <span class="card-num">01 / CHRONICLE</span>
-                <h3>断代编年考</h3>
-                <p>从先秦远古群雄的模糊割据，到秦汉大一统的郡县规制；从魏晋南北朝的纷乱交织，到隋唐地缘的巅峰交响。精准追踪每一次行政区划的合并与撕裂。</p>
-            </div>
-            <div class="detail-card">
-                <span class="card-num">02 / GEOGRAPHY</span>
-                <h3>山河百川牢</h3>
-                <p>地缘线既是防线，亦是囚笼。视频采用严格的地理信息对齐，将历史人物的政治博弈与军事冲突，具象化呈现在重峦叠嶂与江河改道的地理底座之上。</p>
-            </div>
-            <div class="detail-card">
-                <span class="card-num">03 / AESTHETICS</span>
-                <h3>新中式视听</h3>
-                <p>告别喧嚣的色彩，回归极其严谨的学术档案馆质感。采用低饱和度的水墨深灰与朱砂红，配以考究的中文衬线字形，让历史的厚重随卷轴缓缓流淌。</p>
-            </div>
-        </section>
+          </div>
 
-        <!-- 结构 D：概念收尾 -->
-        <footer class="outro-section">
-            <div class="outro-text">
-                <h4>舆图冷眼 岁月无声</h4>
-                <p>© 2026 囚图纪工作室. 保留所有考据视觉权利。</p>
-            </div>
-            <div class="seal-group">
-                <div style="font-size: 0.75rem; color: var(--text-muted); writing-mode: vertical-rl; letter-spacing: 4px;">九朝更迭百川归海</div>
-                <div class="seal-red">舆图皆囚</div>
-            </div>
-        </footer>
+        </div>
 
-    </div>
+      </section>
 
-</body>
-</html>
+      {/* 赛季时间轴 */}
+      <section className="py-24 bg-[#101820]">
+
+        <h2 className="text-4xl font-bold text-center mb-12">
+          历史赛季时间轴
+        </h2>
+
+        <div className="overflow-x-auto">
+
+          <div className="flex gap-4 px-8 min-w-max">
+
+            {seasons.map((season) => (
+              <div
+                key={season}
+                className="bg-[#162635] border border-yellow-700 rounded-xl px-8 py-6 hover:scale-105 transition cursor-pointer"
+              >
+                {season}
+              </div>
+            ))}
+
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* 热门赛区 */}
+      <section className="py-24 px-8">
+
+        <h2 className="text-4xl font-bold text-center mb-12">
+          34赛区联盟
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+          {regions.map((region) => (
+            <div
+              key={region}
+              className="bg-[#13202d] border border-yellow-700 rounded-xl p-6"
+            >
+              <h3 className="text-2xl font-bold mb-4">
+                {region}
+              </h3>
+
+              <p>经济值：★★★★☆</p>
+              <p>历史等级：钻石</p>
+              <p>视频数量：23</p>
+
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* 战报 */}
+      <section className="py-24 bg-[#101820]">
+
+        <h2 className="text-4xl font-bold text-center mb-12">
+          最新历史战报
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-8">
+
+          {[1, 2, 3].map((item) => (
+            <div
+              key={item}
+              className="bg-[#162635] rounded-xl overflow-hidden border border-yellow-700"
+            >
+
+              <div className="h-48 bg-gray-700" />
+
+              <div className="p-6">
+
+                <h3 className="text-xl font-bold mb-3">
+                  秦朝俱乐部南征百越
+                </h3>
+
+                <p className="text-gray-400">
+                  2026-05-31
+                </p>
+
+              </div>
+
+            </div>
+          ))}
+
+        </div>
+
+      </section>
+
+      {/* FOOTER */}
+      <footer className="py-10 border-t border-yellow-700 text-center text-gray-400">
+
+        囚图纪 Universe © 2026
+
+      </footer>
+
+    </main>
+  );
+}
