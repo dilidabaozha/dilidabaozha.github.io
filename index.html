@@ -3,314 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>囚图纪 · 历史时空海报</title>
+    <title>囚图纪 · 历史时空海报集</title>
     <style>
         :root {
             --bg-base: #0a0b10; 
             --ink-black: #11131b;
-            --parchment: #d2c5b3; /* 仿古宣纸/羊皮纸色 */
-            --bronze: #a98c64;    /* 古铜/黯金 */
-            --crimson: #8c2424;   /* 历史沉淀的朱砂红 */
+            --parchment: #d2c5b3;
+            --bronze: #a98c64;
+            --crimson: #8c2424;
             --text-main: #e2e4ec;
             --text-muted: #7e8294;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        /* 站酷风格允许纵向无限延伸滚动 */
         body {
             background-color: var(--bg-base);
-            font-family: 'Noto Serif SC', 'Source Han Serif CN', 'SimSun', serif;
+            font-family: 'Noto Serif SC', 'Source Han Serif CN', serif;
             color: var(--text-main);
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            position: relative;
+            overflow-x: hidden;
         }
 
-        /* ================= 🎨 核心：手绘古典经纬世界地图背景海报 ================= */
+        /* 1. 全局史诗地图背景（固定不动） */
         .map-background {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 1;
             pointer-events: none;
-            opacity: 0.75;
-            /* 利用高级SVG矢量图技术，直接在网页底层绘制出史诗级世界地图与航海经纬仪线 */
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3CradialGradient id='compassGlow' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23a98c64' stop-opacity='0.15'/%3E%3Cstop offset='100%25' stop-color='%23a98c64' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3C!-- 核心罗盘航海经纬仪 --%3E%3Ccircle cx='800' cy='450' r='380' fill='url(%23compassGlow)' stroke='rgba(169, 140, 100, 0.15)' stroke-width='1'/%3E%3Ccircle cx='800' cy='450' r='360' fill='none' stroke='rgba(169, 140, 100, 0.08)' stroke-width='1' stroke-dasharray='4,4'/%3E%3Ccircle cx='800' cy='450' r='180' fill='none' stroke='rgba(169, 140, 100, 0.05)' stroke-width='1'/%3E%3Cpath d='M800,20 L800,880 M200,450 L1400,450' stroke='rgba(169, 140, 100, 0.08)' stroke-width='1' stroke-dasharray='8,8'/%3E%3Cpath d='M350,180 L1250,720 M350,720 L1250,180' stroke='rgba(169, 140, 100, 0.04)' stroke-width='0.5'/%3E%3C!-- 抽象古典世界大陆轮廓线 --%3E%3Cpath d='M 150,250 Q 250,180 350,220 T 550,200 T 750,240 T 980,180 T 1200,220 T 1450,150 Q 1500,350 1400,500 T 1100,650 T 800,720 T 550,680 T 300,600 T 100,400 Z' fill='none' stroke='rgba(169, 140, 100, 0.13)' stroke-width='1.5'/%3E%3Cpath d='M 250,320 Q 320,380 400,340 T 600,420 T 800,380 T 1100,450 T 1350,390' fill='none' stroke='rgba(169, 140, 100, 0.06)' stroke-width='1'/%3E%3Cpath d='M 450,500 Q 550,550 650,520 T 850,580 T 1050,540' fill='none' stroke='rgba(169, 140, 100, 0.08)' stroke-width='1' stroke-dasharray='2,4'/%3E%3C/svg%3E");
+            opacity: 0.65;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 900'%3E%3Ccircle cx='800' cy='450' r='380' fill='none' stroke='rgba(169, 140, 100, 0.12)' stroke-width='1'/%3E%3Cpath d='M800,20 L800,880 M200,450 L1400,450' stroke='rgba(169, 140, 100, 0.06)' stroke-width='1' stroke-dasharray='8,8'/%3E%3Cpath d='M 150,250 Q 350,220 550,200 T 980,180 T 1450,150 Q 1500,350 1400,500 T 800,720 Z' fill='none' stroke='rgba(169, 140, 100, 0.1)' stroke-width='1.5'/%3E%3C/svg%3E");
             background-size: cover;
             background-position: center;
         }
-
-        /* 电影级暗角滤镜：将视觉焦点牢牢锁在中间的视频大幕上 */
         .vignette-overlay {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(10, 11, 16, 0.7) 60%, rgba(6, 7, 10, 0.98) 95%);
+            background: radial-gradient(circle, transparent 20%, rgba(10, 11, 16, 0.9) 90%);
             z-index: 2;
             pointer-events: none;
         }
 
-        /* ================= 海报核心布局 ================= */
-        .poster-layout {
+        /* 2. 纵向长图流式容器 */
+        .zcool-container {
             position: relative;
             z-index: 10;
-            flex: 1;
-            display: flex;
-            padding: 40px;
-            gap: 40px;
-            max-width: 1600px;
-            width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        /* ================= 左侧栏：史诗画卷断代轴 ================= */
-        .poster-sidebar {
-            width: 320px;
-            background: rgba(17, 19, 27, 0.75);
-            border: 1px solid rgba(169, 140, 100, 0.18);
-            padding: 30px 24px;
+            padding: 60px 20px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            backdrop-filter: blur(12px);
+            gap: 100px; /* 模块之间留出大量空白，营造高级感 */
         }
 
-        .sidebar-meta {
-            font-size: 0.75rem;
+        /* 📌 结构 A：巨幕电影感头图（一进网页的视觉轰炸） */
+        .hero-banner {
+            text-align: center;
+            padding: 100px 0 60px 0;
+            position: relative;
+        }
+        .hero-banner .subtitle {
+            font-size: 0.9rem;
             color: var(--bronze);
-            letter-spacing: 4px;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(169, 140, 100, 0.2);
-            padding-bottom: 10px;
-            font-family: monospace;
+        }
+        .hero-banner h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            letter-spacing: 15px;
+            color: #fff;
+            margin-bottom: 30px;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        .hero-banner h1 span { color: var(--crimson); }
+        
+        /* 站酷灵魂：极细的古典装饰线 */
+        .divider-line {
+            width: 120px; height: 1px; background: var(--bronze); margin: 0 auto 30px auto; position: relative;
+        }
+        .divider-line::before {
+            content: ''; position: absolute; top: -3px; left: 54px; width: 8px; height: 8px; background: var(--crimson); transform: rotate(45deg);
         }
 
-        .epoch-group { margin-bottom: 5px; }
+        .hero-desc {
+            max-width: 600px; margin: 0 auto; font-size: 1rem; line-height: 2; color: var(--parchment); opacity: 0.8;
+        }
 
-        .epoch-header {
-            background: #191b24;
-            border: 1px solid rgba(169, 140, 100, 0.25);
-            padding: 14px 16px;
-            font-size: 0.95rem;
-            color: var(--parchment);
-            font-weight: bold;
-            letter-spacing: 2px;
-            cursor: pointer;
+        /* 📌 结构 B：画卷式视频大幕区（核心作品展示） */
+        .work-display-section {
+            background: var(--ink-black);
+            border: 1px solid rgba(169, 140, 100, 0.2);
+            padding: 8px;
+            box-shadow: 0 40px 90px rgba(0,0,0,0.9);
+            position: relative;
+        }
+        .work-display-section::before {
+            content: ''; position: absolute; top: -1px; left: -1px; width: 20px; height: 20px; border-top: 2px solid var(--bronze); border-left: 2px solid var(--bronze);
+        }
+        .work-display-section::after {
+            content: ''; position: absolute; bottom: -1px; right: -1px; width: 20px; height: 20px; border-bottom: 2px solid var(--bronze); border-right: 2px solid var(--bronze);
+        }
+        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; background: #000; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        /* 📌 结构 C：三栏式历史图文拆解（站酷最核心的信息层叠感） */
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .detail-card {
+            background: rgba(17, 19, 27, 0.6);
+            border: 1px solid rgba(169, 140, 100, 0.15);
+            padding: 35px 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .detail-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--crimson);
+        }
+        .card-num {
+            font-family: 'Courier New', monospace; font-size: 1.5rem; color: var(--crimson); font-weight: bold; margin-bottom: 15px; display: block;
+        }
+        .detail-card h3 { font-size: 1.2rem; color: #fff; margin-bottom: 15px; letter-spacing: 2px; }
+        .detail-card p { font-size: 0.88rem; line-height: 1.8; color: var(--text-muted); text-align: justify; }
+
+        /* 📌 结构 D：大字报式概念收尾区 */
+        .outro-section {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .epoch-header:hover { background: #202330; border-color: var(--bronze); }
-        .epoch-header::after { content: '＋'; font-size: 0.8rem; color: var(--bronze); transition: transform 0.3s; }
-        
-        .epoch-group.active .epoch-header {
-            background: rgba(140, 36, 36, 0.12);
-            border-color: var(--crimson);
-            color: #fff;
-        }
-        .epoch-group.active .epoch-header::after { content: '－'; color: var(--crimson); }
-
-        .dynasty-container {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .epoch-group.active .dynasty-container { max-height: 500px; }
-
-        .dynasty-list { list-style: none; padding: 10px 5px 10px 15px; }
-
-        .dynasty-item {
-            font-size: 0.9rem;
-            padding: 7px 0;
-            color: #9ba0b4;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            transition: color 0.2s;
-        }
-        .dynasty-item:hover, .dynasty-item.active { color: var(--parchment); }
-
-        .sub-dynasty-list {
-            list-style: none;
-            padding-left: 15px;
-            border-left: 1px dashed rgba(169, 140, 100, 0.2);
-            margin: 4px 0 8px 4px;
-        }
-        .sub-dynasty-item {
-            font-size: 0.82rem;
-            padding: 5px 0;
-            color: var(--text-muted);
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            transition: color 0.2s;
-        }
-        .sub-dynasty-item:hover { color: var(--bronze); }
-        .sub-dynasty-item.active { color: var(--crimson); font-weight: bold; }
-
-        .year-tag { font-family: 'Courier New', monospace; font-size: 0.75rem; color: #4c5063; }
-
-        /* ================= 右侧：大幕式海报主体 ================= */
-        .poster-main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .center-stage {
-            background: var(--ink-black);
-            border: 1px solid rgba(169, 140, 100, 0.2);
-            padding: 6px;
-            box-shadow: 0 35px 80px rgba(0,0,0,0.9);
-            position: relative;
-        }
-        .center-stage::before {
-            content: ''; position: absolute; top: -1px; left: -1px; width: 18px; height: 18px;
-            border-top: 2px solid var(--bronze); border-left: 2px solid var(--bronze);
-        }
-        .center-stage::after {
-            content: ''; position: absolute; bottom: -1px; right: -1px; width: 18px; height: 18px;
-            border-bottom: 2px solid var(--bronze); border-right: 2px solid var(--bronze);
-        }
-
-        .video-container {
-            position: relative; padding-bottom: 56.25%; height: 0; background: #000;
-        }
-        .video-container iframe {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;
-        }
-
-        /* ================= 底部：叙事文案与章印 ================= */
-        .poster-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 25px;
             border-top: 1px solid rgba(169, 140, 100, 0.15);
-            padding-top: 24px;
+            padding-top: 40px;
+            margin-top: 40px;
         }
-
-        .story-titles { max-width: 65%; }
-        .story-titles h2 {
-            font-size: 2.5rem; font-weight: 700; letter-spacing: 6px; color: #fff;
-            margin-bottom: 14px; text-shadow: 0 2px 15px rgba(0,0,0,0.8);
-        }
-        .story-titles h2 span { color: var(--crimson); }
-        .story-titles p {
-            font-size: 0.95rem; line-height: 1.8; color: var(--parchment);
-            opacity: 0.85; text-align: justify;
-        }
-
-        .concept-seal { display: flex; gap: 30px; align-items: center; }
-        .vertical-text {
-            writing-mode: vertical-rl; font-size: 0.78rem; letter-spacing: 5px;
-            color: var(--text-muted); line-height: 1.6; height: 95px;
-        }
-        .seal-box {
-            border: 2px solid var(--crimson); padding: 12px 6px; color: var(--crimson);
-            font-weight: 900; font-size: 1.15rem; letter-spacing: 3px;
-            writing-mode: vertical-rl; line-height: 1.1;
-            background: rgba(140, 36, 36, 0.03); box-shadow: 0 0 20px rgba(140, 36, 36, 0.15);
+        .outro-text h4 { font-size: 1.8rem; letter-spacing: 4px; color: var(--parchment); margin-bottom: 10px; }
+        .outro-text p { font-size: 0.9rem; color: var(--text-muted); }
+        
+        .seal-group { display: flex; gap: 20px; align-items: center; }
+        .seal-red {
+            border: 2px solid var(--crimson); padding: 10px 5px; color: var(--crimson); font-weight: 900; font-size: 1.1rem; writing-mode: vertical-rl; letter-spacing: 2px; background: rgba(140, 36, 36, 0.02);
         }
     </style>
 </head>
 <body>
 
-    <!-- 💡 背景海报图层组（无需额外上传图片，代码自适应生成） -->
     <div class="map-background"></div>
     <div class="vignette-overlay"></div>
 
-    <!-- 海报主体架构 -->
-    <div class="poster-layout">
+    <!-- 站酷流式长图布局 -->
+    <div class="zcool-container">
         
-        <!-- 左侧：古典画卷轴断代目录 -->
-        <aside class="poster-sidebar">
-            <div class="sidebar-meta">Chronology / 编年</div>
-            
-            <div class="epoch-group">
-                <div class="epoch-header" onclick="toggleEpoch(this)">先秦 · 远古群雄</div>
-                <div class="dynasty-container">
-                    <ul class="dynasty-list">
-                        <li class="dynasty-item"><span>石器与古国时代</span><span class="year-tag">远古</span></li>
-                        <li class="dynasty-item"><span>夏商西周</span><span class="year-tag">前21世纪</span></li>
-                        <li class="dynasty-item"><span>东周</span><span class="year-tag">前770</span></li>
-                        <ul class="sub-dynasty-list">
-                            <li class="sub-dynasty-item"><span>春秋时代</span><span class="year-tag">前770</span></li>
-                            <li class="sub-dynasty-item"><span>战国诸侯</span><span class="year-tag">前475</span></li>
-                        </ul>
-                    </ul>
-                </div>
-            </div>
+        <!-- 结构 A：史诗头图 -->
+        <header class="hero-banner">
+            <div class="subtitle">An Administrative History Project</div>
+            <h1>囚图纪 · <span>九朝变革</span></h1>
+            <div class="divider-line"></div>
+            <p class="hero-desc">
+                舆图之上，皆为囚徒。这是一部关于中国历代地缘边界演变的视觉考据史，用冷峻的图幅线条，重构被地理行政划分禁锢的波澜壮阔。
+            </p>
+        </header>
 
-            <div class="epoch-group active">
-                <div class="epoch-header" onclick="toggleEpoch(this)">秦汉 · 割据开端</div>
-                <div class="dynasty-container">
-                    <ul class="dynasty-list">
-                        <li class="dynasty-item"><span>秦朝疆域</span><span class="year-tag">前221</span></li>
-                        <li class="dynasty-item"><span>汉朝大一统</span><span class="year-tag">前202</span></li>
-                        <ul class="sub-dynasty-list">
-                            <li class="sub-dynasty-item"><span>西楚霸权</span><span class="year-tag">前206</span></li>
-                            <li class="sub-dynasty-item"><span>西汉时期</span><span class="year-tag">前202</span></li>
-                            <li class="sub-dynasty-item"><span>新朝变局</span><span class="year-tag">9</span></li>
-                            <li class="sub-dynasty-item"><span>东汉中兴</span><span class="year-tag">25</span></li>
-                        </ul>
-                        <li class="dynasty-item"><span>三国鼎立</span><span class="year-tag">220</span></li>
-                        <ul class="sub-dynasty-list">
-                            <li class="sub-dynasty-item"><span>曹魏政权</span><span class="year-tag">220</span></li>
-                            <li class="sub-dynasty-item"><span>蜀汉正统</span><span class="year-tag">221</span></li>
-                            <li class="sub-dynasty-item"><span>孙吴地缘</span><span class="year-tag">229</span></li>
-                        </ul>
-                    </ul>
-                </div>
+        <!-- 结构 B：巨幕作品流 -->
+        <section class="work-display-section">
+            <div class="video-wrapper">
+                <iframe src="//player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
             </div>
+        </section>
 
-            <div class="epoch-group">
-                <div class="epoch-header" onclick="toggleEpoch(this)">隋唐 · 巅峰地缘</div>
-                <div class="dynasty-container">
-                    <ul class="dynasty-list">
-                        <li class="dynasty-item"><span>隋朝鼎盛</span><span class="year-tag">581</span></li>
-                        <li class="dynasty-item"><span>唐朝疆域</span><span class="year-tag">618</span></li>
-                        <ul class="sub-dynasty-list">
-                            <li class="sub-dynasty-item active"><span>武周代唐</span><span class="year-tag">690</span></li>
-                        </ul>
-                    </ul>
-                </div>
+        <!-- 结构 C：画廊式考据细节拆解（站酷招牌式的信息排版） -->
+        <section class="details-grid">
+            <div class="detail-card">
+                <span class="card-num">01 / CHRONICLE</span>
+                <h3>断代编年考</h3>
+                <p>从先秦远古群雄的模糊割据，到秦汉大一统的郡县规制；从魏晋南北朝的纷乱交织，到隋唐地缘的巅峰交响。精准追踪每一次行政区划的合并与撕裂。</p>
             </div>
-        </aside>
-
-        <!-- 右侧：巨幕海报主体 -->
-        <main class="poster-main">
-            <div class="center-stage">
-                <div class="video-container">
-                    <iframe src="//player.bilibili.com/player.html?bvid=BV1GJ411x7h7&page=1&high_quality=1&danmaku=0" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"></iframe>
-                </div>
+            <div class="detail-card">
+                <span class="card-num">02 / GEOGRAPHY</span>
+                <h3>山河百川牢</h3>
+                <p>地缘线既是防线，亦是囚笼。视频采用严格的地理信息对齐，将历史人物的政治博弈与军事冲突，具象化呈现在重峦叠嶂与江河改道的地理底座之上。</p>
             </div>
+            <div class="detail-card">
+                <span class="card-num">03 / AESTHETICS</span>
+                <h3>新中式视听</h3>
+                <p>告别喧嚣的色彩，回归极其严谨的学术档案馆质感。采用低饱和度的水墨深灰与朱砂红，配以考究的中文衬线字形，让历史的厚重随卷轴缓缓流淌。</p>
+            </div>
+        </section>
 
-            <footer class="poster-footer">
-                <div class="story-titles">
-                    <h2>囚图纪 · <span>九朝变革</span></h2>
-                    <p>
-                        舆图之上，皆为囚徒。每一条边界线的重塑，都是千万人宿命的推倒重来。
-                        本章聚焦武周代唐的地缘风暴，看历史地图上的经纬横纵，如何将一个个波澜壮阔的时代与英雄，紧紧囚禁于这山河百川的图幅之间。
-                    </p>
-                </div>
-                
-                <div class="concept-seal">
-                    <div class="vertical-text">百川归海九朝更迭<br>舆图冷眼岁月无声</div>
-                    <div class="seal-box">舆图皆囚</div>
-                </div>
-            </footer>
-        </main>
+        <!-- 结构 D：概念收尾 -->
+        <footer class="outro-section">
+            <div class="outro-text">
+                <h4>舆图冷眼 岁月无声</h4>
+                <p>© 2026 囚图纪工作室. 保留所有考据视觉权利。</p>
+            </div>
+            <div class="seal-group">
+                <div style="font-size: 0.75rem; color: var(--text-muted); writing-mode: vertical-rl; letter-spacing: 4px;">九朝更迭百川归海</div>
+                <div class="seal-red">舆图皆囚</div>
+            </div>
+        </footer>
+
     </div>
 
-    <script>
-        function toggleEpoch(headerElement) {
-            const group = headerElement.parentElement;
-            group.classList.toggle('active');
-        }
-    </script>
 </body>
 </html>
