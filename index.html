@@ -1,198 +1,237 @@
-import {
-  Home,
-  Folder,
-  Grid3X3,
-  MonitorPlay,
-  BookOpen,
-  Heart,
-  History,
-  User,
-  Search,
-  Bell,
-  Play,
-} from "lucide-react";
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-const categories = [
-  "Web开发",
-  "移动应用",
-  "数据可视化",
-  "AI & 机器学习",
-  "游戏开发",
-  "工具 & 其他",
-];
+<title>我的项目 - Project Video</title>
 
-const videos = [
-  {
-    title: "个人博客网站开发全过程",
-    time: "10:32",
-  },
-  {
-    title: "Flutter跨平台应用实战",
-    time: "14:26",
-  },
-  {
-    title: "数据可视化大屏项目",
-    time: "11:45",
-  },
-  {
-    title: "AI图像识别模型训练",
-    time: "16:20",
-  },
-];
+<link rel="stylesheet" href="style.css">
 
-export default function HomePage() {
-  return (
-    <div className="min-h-screen bg-[#06142b] text-white flex">
-      {/* Sidebar */}
-      <aside className="w-[260px] border-r border-blue-900 bg-[#08162f]">
-        <div className="p-6">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500" />
-            <div>
-              <h1 className="font-bold text-xl">我的项目</h1>
-              <p className="text-xs text-gray-400">
-                Project Video
-              </p>
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+rel="stylesheet"
+/>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                <i class="fa-solid fa-play"></i>
             </div>
-          </div>
+
+            <div>
+                <h2>我的项目</h2>
+                <span>Project Video</span>
+            </div>
+
         </div>
 
-        <nav className="px-4 space-y-2">
-          {[
-            [Home, "首页"],
-            [MonitorPlay, "项目视频"],
-            [Grid3X3, "分类浏览"],
-            [Folder, "案例展示"],
-            [BookOpen, "教程分享"],
-            [Heart, "收藏夹"],
-            [History, "观看历史"],
-            [User, "关于我"],
-          ].map(([Icon, text], i) => (
-            <div
-              key={i}
-              className={`flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer ${
-                i === 0
-                  ? "bg-blue-600"
-                  : "hover:bg-blue-950"
-              }`}
-            >
-              <Icon size={18} />
-              {text}
-            </div>
-          ))}
+        <nav>
+
+            <a class="active">
+                <i class="fa-solid fa-house"></i>
+                首页
+            </a>
+
+            <a>
+                <i class="fa-solid fa-video"></i>
+                项目视频
+            </a>
+
+            <a>
+                <i class="fa-solid fa-table-cells"></i>
+                分类浏览
+            </a>
+
+            <a>
+                <i class="fa-solid fa-folder-open"></i>
+                案例展示
+            </a>
+
+            <a>
+                <i class="fa-solid fa-book"></i>
+                教程分享
+            </a>
+
+            <a>
+                <i class="fa-regular fa-heart"></i>
+                收藏夹
+            </a>
+
+            <a>
+                <i class="fa-solid fa-clock-rotate-left"></i>
+                观看历史
+            </a>
+
+            <a>
+                <i class="fa-regular fa-user"></i>
+                关于我
+            </a>
+
         </nav>
 
-        <div className="p-4 mt-6">
-          <button className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+        <button class="upload-btn">
             上传项目视频
-          </button>
-        </div>
-      </aside>
+        </button>
 
-      {/* Main */}
-      <main className="flex-1 p-8">
-        {/* Header */}
-        <header className="flex justify-between items-center mb-8">
-          <div className="flex gap-10">
-            <span className="text-blue-400">首页</span>
-            <span>项目视频</span>
-            <span>分类</span>
-            <span>案例展示</span>
-            <span>教程</span>
-            <span>关于我</span>
-          </div>
+    </aside>
 
-          <div className="flex items-center gap-4">
-            <div className="bg-[#0f2346] px-4 py-3 rounded-full flex items-center gap-2 w-[320px]">
-              <Search size={18} />
-              <input
-                className="bg-transparent outline-none w-full"
-                placeholder="搜索项目、视频..."
-              />
+    <!-- Main -->
+    <main>
+
+        <!-- Top Bar -->
+        <header class="topbar">
+
+            <div class="top-nav">
+
+                <a class="active">首页</a>
+                <a>项目视频</a>
+                <a>分类</a>
+                <a>案例展示</a>
+                <a>教程</a>
+                <a>关于我</a>
+
             </div>
 
-            <Bell />
-            <div className="w-10 h-10 rounded-full bg-gray-600" />
-          </div>
+            <div class="search-box">
+
+                <input
+                type="text"
+                placeholder="搜索项目、视频..."
+                >
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
         </header>
 
-        {/* Hero */}
-        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#081b3b] to-[#102a57] h-[420px] mb-8">
-          <div className="absolute inset-0 opacity-20 bg-[url('/banner.jpg')] bg-cover" />
+        <!-- Hero -->
+        <section class="hero">
 
-          <div className="relative z-10 p-16">
-            <h2 className="text-6xl font-black mb-4">
-              探索我的项目世界
-            </h2>
+            <div class="hero-content">
 
-            <p className="text-2xl text-gray-300 mb-8">
-              分享创意 · 展示成果 · 记录成长
-            </p>
+                <h1>
+                    探索我的项目世界
+                </h1>
 
-            <div className="flex gap-4">
-              <button className="bg-blue-500 px-8 py-4 rounded-full">
-                观看精选视频
-              </button>
+                <p>
+                    分享创意 · 展示成果 · 记录成长
+                </p>
 
-              <button className="border border-white/30 px-8 py-4 rounded-full">
-                了解更多
-              </button>
-            </div>
-          </div>
+                <div class="stats">
 
-          <div className="absolute right-20 top-1/2 -translate-y-1/2">
-            <div className="w-32 h-32 rounded-full bg-blue-500/20 border border-blue-400 flex items-center justify-center">
-              <Play size={40} />
-            </div>
-          </div>
-        </section>
+                    <div>
+                        <strong>128</strong>
+                        <span>视频作品</span>
+                    </div>
 
-        {/* Categories */}
-        <section className="mb-10">
-          <h3 className="text-2xl font-bold mb-5">
-            热门分类
-          </h3>
+                    <div>
+                        <strong>36</strong>
+                        <span>项目分类</span>
+                    </div>
 
-          <div className="grid grid-cols-6 gap-4">
-            {categories.map((item) => (
-              <div
-                key={item}
-                className="bg-[#0c2142] rounded-xl p-5 border border-blue-900"
-              >
-                {item}
-              </div>
-            ))}
-          </div>
-        </section>
+                    <div>
+                        <strong>25.6K</strong>
+                        <span>总播放量</span>
+                    </div>
 
-        {/* Videos */}
-        <section>
-          <h3 className="text-2xl font-bold mb-5">
-            最新项目视频
-          </h3>
-
-          <div className="grid grid-cols-4 gap-6">
-            {videos.map((video) => (
-              <div
-                key={video.title}
-                className="bg-[#0c2142] rounded-2xl overflow-hidden"
-              >
-                <div className="h-48 bg-gradient-to-r from-blue-900 to-cyan-800" />
-
-                <div className="p-4">
-                  <h4 className="font-semibold mb-2">
-                    {video.title}
-                  </h4>
-
-                  <p className="text-sm text-gray-400">
-                    {video.time}
-                  </p>
                 </div>
-              </div>
-            ))}
-          </div>
+
+                <div class="buttons">
+
+                    <button>
+                        观看精选视频
+                    </button>
+
+                    <button class="outline">
+                        了解更多
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="play-circle">
+
+                <i class="fa-solid fa-play"></i>
+
+            </div>
+
         </section>
-      </main>
-    </div>
-  );
-}
+
+        <!-- Categories -->
+
+        <section class="section">
+
+            <div class="section-title">
+                热门分类
+            </div>
+
+            <div class="categories">
+
+                <div class="cat">Web开发</div>
+                <div class="cat">移动应用</div>
+                <div class="cat">数据可视化</div>
+                <div class="cat">AI & 机器学习</div>
+                <div class="cat">游戏开发</div>
+                <div class="cat">工具 & 其他</div>
+
+            </div>
+
+        </section>
+
+        <!-- Videos -->
+
+        <section class="section">
+
+            <div class="section-title">
+                最新项目视频
+            </div>
+
+            <div class="videos">
+
+                <div class="card">
+                    <div class="thumb"></div>
+                    <h3>个人博客网站开发全过程</h3>
+                    <span>2.4K次观看 · 3天前</span>
+                </div>
+
+                <div class="card">
+                    <div class="thumb"></div>
+                    <h3>Flutter跨平台应用实战</h3>
+                    <span>3.8K次观看 · 1周前</span>
+                </div>
+
+                <div class="card">
+                    <div class="thumb"></div>
+                    <h3>数据可视化大屏项目</h3>
+                    <span>5.1K次观看 · 2周前</span>
+                </div>
+
+                <div class="card">
+                    <div class="thumb"></div>
+                    <h3>AI图像识别模型训练</h3>
+                    <span>2.7K次观看 · 3周前</span>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
