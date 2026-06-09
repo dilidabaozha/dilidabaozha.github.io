@@ -1,219 +1,198 @@
-export default function Home() {
-  const seasons = [
-    "S1 夏",
-    "S2 商",
-    "S3 周",
-    "S4 秦",
-    "S5 汉",
-    "S6 三国",
-    "S7 晋",
-    "S8 南北朝",
-    "S9 隋",
-    "S10 唐",
-    "S11 五代十国",
-    "S12 宋",
-    "S13 元",
-    "S14 明",
-    "S15 清",
-    "S16 民国",
-    "S17 新中国",
-  ];
+import {
+  Home,
+  Folder,
+  Grid3X3,
+  MonitorPlay,
+  BookOpen,
+  Heart,
+  History,
+  User,
+  Search,
+  Bell,
+  Play,
+} from "lucide-react";
 
-  const regions = [
-    "江西赛区",
-    "广东赛区",
-    "湖北赛区",
-    "四川赛区",
-    "新疆赛区",
-    "辽宁赛区",
-  ];
+const categories = [
+  "Web开发",
+  "移动应用",
+  "数据可视化",
+  "AI & 机器学习",
+  "游戏开发",
+  "工具 & 其他",
+];
 
+const videos = [
+  {
+    title: "个人博客网站开发全过程",
+    time: "10:32",
+  },
+  {
+    title: "Flutter跨平台应用实战",
+    time: "14:26",
+  },
+  {
+    title: "数据可视化大屏项目",
+    time: "11:45",
+  },
+  {
+    title: "AI图像识别模型训练",
+    time: "16:20",
+  },
+];
+
+export default function HomePage() {
   return (
-    <main className="bg-[#0F1923] text-white min-h-screen">
-
-      {/* NAVBAR */}
-      <nav className="fixed top-0 w-full z-50 bg-black/50 backdrop-blur border-b border-yellow-600">
-        <div className="max-w-7xl mx-auto flex justify-between items-center p-4">
-
-          <div className="text-2xl font-bold text-yellow-500">
-            囚图纪 Universe
-          </div>
-
-          <div className="flex gap-8 text-sm">
-            <a href="#">中国服务器</a>
-            <a href="#">赛区联盟</a>
-            <a href="#">俱乐部中心</a>
-            <a href="#">历史战报</a>
-            <a href="#">世界观百科</a>
+    <div className="min-h-screen bg-[#06142b] text-white flex">
+      {/* Sidebar */}
+      <aside className="w-[260px] border-r border-blue-900 bg-[#08162f]">
+        <div className="p-6">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500" />
+            <div>
+              <h1 className="font-bold text-xl">我的项目</h1>
+              <p className="text-xs text-gray-400">
+                Project Video
+              </p>
+            </div>
           </div>
         </div>
-      </nav>
 
-      {/* HERO */}
-      <section className="h-screen flex items-center justify-center relative overflow-hidden">
+        <nav className="px-4 space-y-2">
+          {[
+            [Home, "首页"],
+            [MonitorPlay, "项目视频"],
+            [Grid3X3, "分类浏览"],
+            [Folder, "案例展示"],
+            [BookOpen, "教程分享"],
+            [Heart, "收藏夹"],
+            [History, "观看历史"],
+            [User, "关于我"],
+          ].map(([Icon, text], i) => (
+            <div
+              key={i}
+              className={`flex items-center gap-3 px-4 py-3 rounded-xl cursor-pointer ${
+                i === 0
+                  ? "bg-blue-600"
+                  : "hover:bg-blue-950"
+              }`}
+            >
+              <Icon size={18} />
+              {text}
+            </div>
+          ))}
+        </nav>
 
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1521295121783-8a321d551ad2')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div className="p-4 mt-6">
+          <button className="w-full py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500">
+            上传项目视频
+          </button>
+        </div>
+      </aside>
 
-        <div className="text-center z-10">
-
-          <h1 className="text-7xl font-black mb-6">
-            囚图纪 UNIVERSE
-          </h1>
-
-          <p className="text-xl text-gray-300 mb-8">
-            从史前测试服到新时代赛季
-            <br />
-            一部中国历史电竞编年史
-          </p>
-
-          <div className="flex gap-4 justify-center">
-
-            <button className="px-8 py-4 bg-yellow-600 rounded-lg hover:bg-yellow-500 transition">
-              进入中国服务器
-            </button>
-
-            <button className="px-8 py-4 border border-yellow-600 rounded-lg hover:bg-yellow-600/20 transition">
-              观看历史战报
-            </button>
-
+      {/* Main */}
+      <main className="flex-1 p-8">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-8">
+          <div className="flex gap-10">
+            <span className="text-blue-400">首页</span>
+            <span>项目视频</span>
+            <span>分类</span>
+            <span>案例展示</span>
+            <span>教程</span>
+            <span>关于我</span>
           </div>
 
-        </div>
-      </section>
-
-      {/* 中国服务器 */}
-      <section className="py-24 px-8">
-
-        <h2 className="text-4xl font-bold text-center mb-12">
-          中国服务器
-        </h2>
-
-        <div className="max-w-6xl mx-auto bg-[#13202d] rounded-2xl p-8 border border-yellow-700">
-
-          <div className="h-[500px] flex items-center justify-center">
-
-            <div className="text-center">
-              <div className="text-3xl mb-4">
-                中国地图区域
-              </div>
-
-              <div className="text-gray-400">
-                后期接入 GeoJSON 地图
-              </div>
+          <div className="flex items-center gap-4">
+            <div className="bg-[#0f2346] px-4 py-3 rounded-full flex items-center gap-2 w-[320px]">
+              <Search size={18} />
+              <input
+                className="bg-transparent outline-none w-full"
+                placeholder="搜索项目、视频..."
+              />
             </div>
 
+            <Bell />
+            <div className="w-10 h-10 rounded-full bg-gray-600" />
+          </div>
+        </header>
+
+        {/* Hero */}
+        <section className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-[#081b3b] to-[#102a57] h-[420px] mb-8">
+          <div className="absolute inset-0 opacity-20 bg-[url('/banner.jpg')] bg-cover" />
+
+          <div className="relative z-10 p-16">
+            <h2 className="text-6xl font-black mb-4">
+              探索我的项目世界
+            </h2>
+
+            <p className="text-2xl text-gray-300 mb-8">
+              分享创意 · 展示成果 · 记录成长
+            </p>
+
+            <div className="flex gap-4">
+              <button className="bg-blue-500 px-8 py-4 rounded-full">
+                观看精选视频
+              </button>
+
+              <button className="border border-white/30 px-8 py-4 rounded-full">
+                了解更多
+              </button>
+            </div>
           </div>
 
-        </div>
+          <div className="absolute right-20 top-1/2 -translate-y-1/2">
+            <div className="w-32 h-32 rounded-full bg-blue-500/20 border border-blue-400 flex items-center justify-center">
+              <Play size={40} />
+            </div>
+          </div>
+        </section>
 
-      </section>
+        {/* Categories */}
+        <section className="mb-10">
+          <h3 className="text-2xl font-bold mb-5">
+            热门分类
+          </h3>
 
-      {/* 赛季时间轴 */}
-      <section className="py-24 bg-[#101820]">
-
-        <h2 className="text-4xl font-bold text-center mb-12">
-          历史赛季时间轴
-        </h2>
-
-        <div className="overflow-x-auto">
-
-          <div className="flex gap-4 px-8 min-w-max">
-
-            {seasons.map((season) => (
+          <div className="grid grid-cols-6 gap-4">
+            {categories.map((item) => (
               <div
-                key={season}
-                className="bg-[#162635] border border-yellow-700 rounded-xl px-8 py-6 hover:scale-105 transition cursor-pointer"
+                key={item}
+                className="bg-[#0c2142] rounded-xl p-5 border border-blue-900"
               >
-                {season}
+                {item}
               </div>
             ))}
-
           </div>
+        </section>
 
-        </div>
+        {/* Videos */}
+        <section>
+          <h3 className="text-2xl font-bold mb-5">
+            最新项目视频
+          </h3>
 
-      </section>
+          <div className="grid grid-cols-4 gap-6">
+            {videos.map((video) => (
+              <div
+                key={video.title}
+                className="bg-[#0c2142] rounded-2xl overflow-hidden"
+              >
+                <div className="h-48 bg-gradient-to-r from-blue-900 to-cyan-800" />
 
-      {/* 热门赛区 */}
-      <section className="py-24 px-8">
+                <div className="p-4">
+                  <h4 className="font-semibold mb-2">
+                    {video.title}
+                  </h4>
 
-        <h2 className="text-4xl font-bold text-center mb-12">
-          34赛区联盟
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-
-          {regions.map((region) => (
-            <div
-              key={region}
-              className="bg-[#13202d] border border-yellow-700 rounded-xl p-6"
-            >
-              <h3 className="text-2xl font-bold mb-4">
-                {region}
-              </h3>
-
-              <p>经济值：★★★★☆</p>
-              <p>历史等级：钻石</p>
-              <p>视频数量：23</p>
-
-            </div>
-          ))}
-
-        </div>
-
-      </section>
-
-      {/* 战报 */}
-      <section className="py-24 bg-[#101820]">
-
-        <h2 className="text-4xl font-bold text-center mb-12">
-          最新历史战报
-        </h2>
-
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto px-8">
-
-          {[1, 2, 3].map((item) => (
-            <div
-              key={item}
-              className="bg-[#162635] rounded-xl overflow-hidden border border-yellow-700"
-            >
-
-              <div className="h-48 bg-gray-700" />
-
-              <div className="p-6">
-
-                <h3 className="text-xl font-bold mb-3">
-                  秦朝俱乐部南征百越
-                </h3>
-
-                <p className="text-gray-400">
-                  2026-05-31
-                </p>
-
+                  <p className="text-sm text-gray-400">
+                    {video.time}
+                  </p>
+                </div>
               </div>
-
-            </div>
-          ))}
-
-        </div>
-
-      </section>
-
-      {/* FOOTER */}
-      <footer className="py-10 border-t border-yellow-700 text-center text-gray-400">
-
-        囚图纪 Universe © 2026
-
-      </footer>
-
-    </main>
+            ))}
+          </div>
+        </section>
+      </main>
+    </div>
   );
 }
