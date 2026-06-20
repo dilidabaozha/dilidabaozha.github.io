@@ -1,237 +1,209 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>我的项目 - Project Video</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-rel="stylesheet"
-/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="我的项目视频展示网站 - 分享创意、展示成果、记录成长">
+    <title>我的项目 - Project Video</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="layout">
 
-    <!-- Sidebar -->
+    <!-- 侧边栏导航 -->
     <aside class="sidebar">
-
-        <div class="logo">
-
-            <div class="logo-icon">
-                <i class="fa-solid fa-play"></i>
+        <div class="sidebar-header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div class="logo-text">
+                    <h2>我的项目</h2>
+                    <span>Project Video</span>
+                </div>
             </div>
-
-            <div>
-                <h2>我的项目</h2>
-                <span>Project Video</span>
-            </div>
-
         </div>
 
-        <nav>
-
-            <a class="active">
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-section="home">
                 <i class="fa-solid fa-house"></i>
                 首页
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="videos">
                 <i class="fa-solid fa-video"></i>
                 项目视频
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="categories">
                 <i class="fa-solid fa-table-cells"></i>
                 分类浏览
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="showcase">
                 <i class="fa-solid fa-folder-open"></i>
                 案例展示
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="tutorials">
                 <i class="fa-solid fa-book"></i>
                 教程分享
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="favorites">
                 <i class="fa-regular fa-heart"></i>
                 收藏夹
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="history">
                 <i class="fa-solid fa-clock-rotate-left"></i>
                 观看历史
             </a>
-
-            <a>
+            <a href="#" class="nav-item" data-section="about">
                 <i class="fa-regular fa-user"></i>
                 关于我
             </a>
-
         </nav>
 
-        <button class="upload-btn">
-            上传项目视频
-        </button>
-
+        <div class="sidebar-footer">
+            <button class="upload-btn">
+                <i class="fa-solid fa-plus"></i>
+                上传项目视频
+            </button>
+        </div>
     </aside>
 
-    <!-- Main -->
-    <main>
-
-        <!-- Top Bar -->
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 顶部导航栏 -->
         <header class="topbar">
-
-            <div class="top-nav">
-
-                <a class="active">首页</a>
-                <a>项目视频</a>
-                <a>分类</a>
-                <a>案例展示</a>
-                <a>教程</a>
-                <a>关于我</a>
-
+            <nav class="top-nav">
+                <a href="#" class="nav-link active">首页</a>
+                <a href="#" class="nav-link">项目视频</a>
+                <a href="#" class="nav-link">分类</a>
+                <a href="#" class="nav-link">案例展示</a>
+                <a href="#" class="nav-link">教程</a>
+                <a href="#" class="nav-link">关于我</a>
+            </nav>
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" placeholder="搜索项目、视频..." aria-label="搜索">
+                    <button class="search-btn" aria-label="搜索">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
             </div>
-
-            <div class="search-box">
-
-                <input
-                type="text"
-                placeholder="搜索项目、视频..."
-                >
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-            </div>
-
         </header>
 
-        <!-- Hero -->
+        <!-- Hero横幅 -->
         <section class="hero">
-
             <div class="hero-content">
-
-                <h1>
-                    探索我的项目世界
-                </h1>
-
-                <p>
-                    分享创意 · 展示成果 · 记录成长
-                </p>
-
+                <h1>探索我的项目世界</h1>
+                <p>分享创意 · 展示成果 · 记录成长</p>
                 <div class="stats">
-
-                    <div>
+                    <div class="stat-item">
                         <strong>128</strong>
                         <span>视频作品</span>
                     </div>
-
-                    <div>
+                    <div class="stat-item">
                         <strong>36</strong>
                         <span>项目分类</span>
                     </div>
-
-                    <div>
+                    <div class="stat-item">
                         <strong>25.6K</strong>
                         <span>总播放量</span>
                     </div>
-
                 </div>
-
-                <div class="buttons">
-
-                    <button>
-                        观看精选视频
-                    </button>
-
-                    <button class="outline">
-                        了解更多
-                    </button>
-
+                <div class="hero-buttons">
+                    <button class="btn-primary">观看精选视频</button>
+                    <button class="btn-secondary">了解更多</button>
                 </div>
-
             </div>
-
             <div class="play-circle">
-
                 <i class="fa-solid fa-play"></i>
-
             </div>
-
         </section>
 
-        <!-- Categories -->
-
-        <section class="section">
-
-            <div class="section-title">
-                热门分类
+        <!-- 分类区域 -->
+        <section class="section categories-section">
+            <h2 class="section-title">热门分类</h2>
+            <div class="categories-wrapper">
+                <div class="categories-scroll">
+                    <button class="category-tag">Web开发</button>
+                    <button class="category-tag">移动应用</button>
+                    <button class="category-tag">数据可视化</button>
+                    <button class="category-tag">AI & 机器学习</button>
+                    <button class="category-tag">游戏开发</button>
+                    <button class="category-tag">工具 & 其他</button>
+                    <button class="category-tag">前端框架</button>
+                    <button class="category-tag">后端开发</button>
+                    <button class="category-tag">数据库</button>
+                    <button class="category-tag">云计算</button>
+                </div>
             </div>
-
-            <div class="categories">
-
-                <div class="cat">Web开发</div>
-                <div class="cat">移动应用</div>
-                <div class="cat">数据可视化</div>
-                <div class="cat">AI & 机器学习</div>
-                <div class="cat">游戏开发</div>
-                <div class="cat">工具 & 其他</div>
-
-            </div>
-
         </section>
 
-        <!-- Videos -->
+        <!-- 视频展示区 -->
+        <section class="section videos-section">
+            <h2 class="section-title">最新项目视频</h2>
+            <div class="videos-grid">
+                <article class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="thumbnail-placeholder"></div>
+                        <span class="video-duration">12:35</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">个人博客网站开发全过程</h3>
+                        <div class="video-meta">
+                            <span class="channel-name">技术分享</span>
+                            <span class="video-stats">2.4K次观看 · 3天前</span>
+                        </div>
+                    </div>
+                </article>
 
-        <section class="section">
+                <article class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="thumbnail-placeholder"></div>
+                        <span class="video-duration">18:22</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Flutter跨平台应用实战</h3>
+                        <div class="video-meta">
+                            <span class="channel-name">移动开发</span>
+                            <span class="video-stats">3.8K次观看 · 1周前</span>
+                        </div>
+                    </div>
+                </article>
 
-            <div class="section-title">
-                最新项目视频
+                <article class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="thumbnail-placeholder"></div>
+                        <span class="video-duration">25:10</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">数据可视化大屏项目</h3>
+                        <div class="video-meta">
+                            <span class="channel-name">数据科学</span>
+                            <span class="video-stats">5.1K次观看 · 2周前</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="video-card">
+                    <div class="video-thumbnail">
+                        <div class="thumbnail-placeholder"></div>
+                        <span class="video-duration">15:45</span>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">AI图像识别模型训练</h3>
+                        <div class="video-meta">
+                            <span class="channel-name">人工智能</span>
+                            <span class="video-stats">2.7K次观看 · 3周前</span>
+                        </div>
+                    </div>
+                </article>
             </div>
-
-            <div class="videos">
-
-                <div class="card">
-                    <div class="thumb"></div>
-                    <h3>个人博客网站开发全过程</h3>
-                    <span>2.4K次观看 · 3天前</span>
-                </div>
-
-                <div class="card">
-                    <div class="thumb"></div>
-                    <h3>Flutter跨平台应用实战</h3>
-                    <span>3.8K次观看 · 1周前</span>
-                </div>
-
-                <div class="card">
-                    <div class="thumb"></div>
-                    <h3>数据可视化大屏项目</h3>
-                    <span>5.1K次观看 · 2周前</span>
-                </div>
-
-                <div class="card">
-                    <div class="thumb"></div>
-                    <h3>AI图像识别模型训练</h3>
-                    <span>2.7K次观看 · 3周前</span>
-                </div>
-
-            </div>
-
         </section>
-
     </main>
-
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
